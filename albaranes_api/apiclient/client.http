@@ -1,0 +1,35 @@
+### Crear cliente
+POST http://localhost:3096/api/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Content-Type: application/json
+
+{
+  "name": "Cliente S.A.",
+  "contactEmail": "cliente@ejemplo.com",
+  "phone": "912345678",
+  "address": "Calle Ejemplo 123"
+}
+
+### Obtener todos los clientes del usuario autenticado
+GET http://localhost:3096/api/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Content-Type: application/json
+
+### Obtener un cliente por ID
+GET http://localhost:3096/api/client/680a6f1b933766a150bc7929
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Content-Type: application/json
+
+### Actualizar cliente por ID
+PUT http://localhost:3096/api/client/680a6f1b933766a150bc7929
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Content-Type: application/json
+
+{
+  "name": "Cliente Actualizado",
+  "contactEmail": "nuevoemail@cliente.com",
+  "phone": "611223344",
+  "address": "Nueva dirección 456"
+}
+
+

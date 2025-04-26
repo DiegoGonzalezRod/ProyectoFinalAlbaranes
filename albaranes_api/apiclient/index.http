@@ -1,0 +1,87 @@
+
+
+
+POST  http://localhost:3096/api/users/register
+Content-Type: application/json
+
+{
+
+    "name": "Prueba10",
+    "code":"123456",
+    "password": "123456789",
+    "email": "prueba10@gmail.com"
+}
+
+### Validar email con código
+POST http://localhost:3096/api/users/validation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Content-Type: application/json
+
+{
+  "code": "123456"
+}
+
+
+###
+POST  http://localhost:3096/api/users/login
+Content-Type: application/json
+
+{
+   "password": "123456789",
+    "email": "prueba10@gmail.com"
+}
+
+###
+PATCH http://localhost:3096/api/storage HTTP/1.1
+Content-Type: multipart/form-data; boundary=Boundry
+
+--Boundry
+Content-Disposition: form-data; name="image"; filename="img.jpg"
+Content-Type: image/jpg
+
+< ./img.jpg
+--Boundry--
+
+
+###
+PATCH http://localhost:3096/api/users/onboardingUser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhZWNlOTM0NTg3YzNjZWQ3MTYzZDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ0OTMyMSwiZXhwIjoxNzQzNDU2NTIxfQ.v4Xya7LwZ6GReUYtlEIUHmXyQXv8F7kBCHvQXhrLy7Q
+Content-Type: application/json
+
+{
+  "name": "Carmen",
+  "apellidos": "Gonzalez ",
+  "nif": "12345678Z"
+}
+
+### PATCH - Onboarding empresa
+PATCH http://localhost:3096/api/users/onboardingCompany
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhZWNlOTM0NTg3YzNjZWQ3MTYzZDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ0OTMyMSwiZXhwIjoxNzQzNDU2NTIxfQ.v4Xya7LwZ6GReUYtlEIUHmXyQXv8F7kBCHvQXhrLy7Q
+Content-Type: application/json
+
+{
+  "companyName": "Munich-RE",
+  "cif": "124333C",
+  "address": "Calle Empresa 1, Madrid",
+  "phone": "912345678",
+  "isFreelance": false
+}
+
+###
+GET http://localhost:3096/api/users/getUser HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+
+###
+DELETE http://localhost:3096/api/users/deleteUser HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhZWI3YjA5YTEzMGI4YTlmOTg0NjIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ0ODk1NSwiZXhwIjoxNzQzNDU2MTU1fQ.ZSO6SEfNkuRWx0_wPEV0olDlS30zzYVRMavvkaQPG08
+Content-Type: application/json
+
+
+###
+PUT http://localhost:3096/api/users/recover-password HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "carmen.glz4@gmail.com",
+  "newPassword": "123456789"
+}
