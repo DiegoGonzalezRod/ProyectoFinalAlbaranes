@@ -1,35 +1,51 @@
 ### Crear cliente
-POST http://localhost:3096/api/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+POST http://localhost:3096/api/cliente
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBkMDM3ZjU5YzEyYjNhMDljNjMxYTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY4MzMyNywiZXhwIjoxNzQ1NjkwNTI3fQ.rzjxfCFHrEcbcs9wK4ryDNukwwQzv7lB6DWcdQKO2e4
 Content-Type: application/json
 
 {
   "name": "Cliente S.A.",
-  "contactEmail": "cliente@ejemplo.com",
+  "contactEmail": "cliente5@ejemplo.com",
   "phone": "912345678",
-  "address": "Calle Ejemplo 123"
+  "address": "Calle ClientePrueba3 123"
 }
 
 ### Obtener todos los clientes del usuario autenticado
 GET http://localhost:3096/api/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYjBhMjY5MzU3NzBjMTI1NzBhY2QiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY2MjExNCwiZXhwIjoxNzQ1NjY5MzE0fQ.q1ajZItKuKo37pULlGh5exGMhGxQjXRjn302Syi5Z7c
 Content-Type: application/json
 
 ### Obtener un cliente por ID
-GET http://localhost:3096/api/client/680a6f1b933766a150bc7929
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+GET http://localhost:3096/api/client/680cb1e06935770c12570add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYjFlMDY5MzU3NzBjMTI1NzBhZGQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY2MjQzMiwiZXhwIjoxNzQ1NjY5NjMyfQ.hsJryqmh8tIR5jjHwsGnb1IhOEnW4G4EqWDSGGZkQjM
 Content-Type: application/json
 
 ### Actualizar cliente por ID
-PUT http://localhost:3096/api/client/680a6f1b933766a150bc7929
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBhNmRkNjZjNjk2NTg3Yzg1YzcyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTUxMzk0MiwiZXhwIjoxNzQ1NTIxMTQyfQ.lQyg1J1eIQPAVkvGIYkWfrfHUYTNNgRijjnSRqH3wqo
+PUT http://localhost:3096/api/client/680ca83654a52f1783e7f7ad
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYTdlZDU0YTUyZjE3ODNlN2Y3YTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY1OTg4NSwiZXhwIjoxNzQ1NjY3MDg1fQ.kdMjSe2Tbk8Lp55Gl0-RF1gYdSgmX17_XBxDk8WPXJQ
 Content-Type: application/json
 
 {
-  "name": "Cliente Actualizado",
-  "contactEmail": "nuevoemail@cliente.com",
+  "name": "Cliente Prueba3 Actualizado",
+  "contactEmail": "prueba3Actualizado@cliente.com",
   "phone": "611223344",
-  "address": "Nueva dirección 456"
+  "address": "Prueb dirección 456"
 }
+
+### Archivar cliente
+PATCH http://localhost:3096/api/client/680cb452e1cbc28e00057a6f/archivar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYjFlMDY5MzU3NzBjMTI1NzBhZGQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY2MjQzMiwiZXhwIjoxNzQ1NjY5NjMyfQ.hsJryqmh8tIR5jjHwsGnb1IhOEnW4G4EqWDSGGZkQjM
+
+### Eliminar cliente (hard delete)
+DELETE http://localhost:3096/api/client/680cb2276935770c12570ae9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYTdlZDU0YTUyZjE3ODNlN2Y3YTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY1OTg4NSwiZXhwIjoxNzQ1NjY3MDg1fQ.kdMjSe2Tbk8Lp55Gl0-RF1gYdSgmX17_XBxDk8WPXJQ
+
+### Listar clientes archivados
+GET http://localhost:3096/api/client/archivados
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYjFlMDY5MzU3NzBjMTI1NzBhZGQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY2MjQzMiwiZXhwIjoxNzQ1NjY5NjMyfQ.hsJryqmh8tIR5jjHwsGnb1IhOEnW4G4EqWDSGGZkQjM
+
+### Recuperar cliente archivado
+PATCH http://localhost:3096/api/client/680cb2276935770c12570ae9/recuperar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBjYjFlMDY5MzU3NzBjMTI1NzBhZGQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY2MjQzMiwiZXhwIjoxNzQ1NjY5NjMyfQ.hsJryqmh8tIR5jjHwsGnb1IhOEnW4G4EqWDSGGZkQjM
 
 

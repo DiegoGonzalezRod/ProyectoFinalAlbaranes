@@ -17,4 +17,38 @@ const validatorCreateProject = [
   (req, res, next) => validateResults(req, res, next)
 ];
 
-module.exports = { validatorCreateProject };
+
+
+
+
+const validatorUpdateProject = [
+  check("name")
+    .optional()
+    .isString().withMessage("El nombre debe ser un texto"),
+
+  check("description")
+    .optional()
+    .isString().withMessage("La descripción debe ser un texto"),
+
+  (req, res, next) => validateResults(req, res, next)
+];
+
+const validatorGetProjectById = [
+  check("id")
+    .exists().withMessage("El ID es obligatorio")
+    .isMongoId().withMessage("Debe ser un ID válido de MongoDB"),
+  (req, res, next) => validateResults(req, res, next)
+];
+
+const validatorArchiveProject = [
+  check("id")
+    .exists().withMessage("El ID es obligatorio")
+    .isMongoId().withMessage("El ID debe ser un MongoID válido"),
+  (req, res, next) => validateResults(req, res, next)
+];
+
+
+
+
+
+module.exports = { validatorCreateProject, validatorUpdateProject,validatorGetProjectById,validatorArchiveProject};

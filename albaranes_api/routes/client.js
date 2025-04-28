@@ -21,4 +21,5 @@ clientRouter.put("/:id", authMiddleware, validatorUpdateClient, updateClient);
 clientRouter.patch("/:id/archivar", authMiddleware,archiveClient);
 clientRouter.delete("/:id", authMiddleware,deleteClient);
 clientRouter.patch("/:id/recuperar", authMiddleware,recoverClient);
+
 module.exports = clientRouter;

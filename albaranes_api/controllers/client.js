@@ -6,14 +6,17 @@ const createClient = async (req, res) => {
   try {
     const data = matchedData(req);
 
-    // 🔒 Verifica si el email ya existe para el mismo usuario
+    // Verifica si el email ya existe para el usuario o para su empresa
     const exists = await ClientModel.findOne({
       contactEmail: data.contactEmail,
-      user: req.user._id
+      $or: [
+        { user: req.user._id },
+        { company: req.user.company?.companyName || null }
+      ]
     });
 
     if (exists) {
-      return res.status(400).json({ message: "Ya existe un cliente con ese email para este usuario" });
+      return res.status(400).json({ message: "Ya existe un cliente con ese email para este usuario o su empresa" });
     }
 
     const body = {
@@ -36,10 +39,16 @@ const getClients = async (req, res) => {
       return res.status(401).json({ message: "Token inválido o expirado" });
     }
 
-    const clients = await ClientModel.find({
+    const filter = {
       deleted: false,
-      user: req.user._id
-    });
+      $or: [{ user: req.user._id }]
+    };
+
+    if (req.user.company?.companyName) {
+      filter.$or.push({ company: req.user.company.companyName });
+    }
+
+    const clients = await ClientModel.find(filter);
 
     if (!clients.length) {
       return res.status(404).json({ message: "No se encontraron clientes" });
@@ -59,14 +68,18 @@ const getClientById = async (req, res) => {
     }
 
     const { id } = req.params;
+
     const client = await ClientModel.findOne({
       _id: id,
       deleted: false,
-      user: req.user._id
+      $or: [
+        { user: req.user._id },
+        { company: req.user.company?.companyName || null }
+      ]
     });
 
     if (!client) {
-      return res.status(404).json({ message: "Cliente no encontrado" });
+      return res.status(404).json({ message: "Cliente no encontrado o no autorizado" });
     }
 
     res.send({ data: client });
@@ -78,12 +91,30 @@ const getClientById = async (req, res) => {
 
 const updateClient = async (req, res) => {
   try {
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ message: "Token inválido o expirado" });
+    }
+
     const { id } = req.params;
     const data = matchedData(req);
 
+    const allowedFields = {
+      name: data.name,
+      contactEmail: data.contactEmail,
+      phone: data.phone,
+      address: data.address
+    };
+
     const client = await ClientModel.findOneAndUpdate(
-      { _id: id, user: req.user._id, deleted: false },
-      data,
+      {
+        _id: id,
+        deleted: false,
+        $or: [
+          { user: req.user._id },
+          { company: req.user.company?.companyName || null }
+        ]
+      },
+      allowedFields,
       { new: true }
     );
 
@@ -91,19 +122,27 @@ const updateClient = async (req, res) => {
       return res.status(404).json({ message: "Cliente no encontrado o no autorizado" });
     }
 
-    res.status(200).json(client);
+    res.status(200).json({ data: client });
   } catch (err) {
     console.log(err);
     handleHttpError(res, "ERROR_UPDATE_CLIENT", 500);
   }
 };
 
+
 const archiveClient = async (req, res) => {
   try {
     const { id } = req.params;
 
     const client = await ClientModel.findOneAndUpdate(
-      { _id: id, user: req.user._id, deleted: false },
+      { 
+        _id: id, 
+        deleted: false,
+        $or: [
+          { user: req.user._id },
+          { company: req.user.company?.companyName || null }
+        ]
+      },
       { deleted: true },
       { new: true }
     );
@@ -123,7 +162,13 @@ const deleteClient = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const result = await ClientModel.deleteOne({ _id: id, user: req.user._id });
+    const result = await ClientModel.deleteOne({
+      _id: id,
+      $or: [
+        { user: req.user._id },
+        { company: req.user.company?.companyName || null }
+      ]
+    });
 
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: "Cliente no encontrado o no autorizado" });
@@ -136,11 +181,15 @@ const deleteClient = async (req, res) => {
   }
 };
 
+
 const getArchivedClients = async (req, res) => {
   try {
     const clients = await ClientModel.find({
       deleted: true,
-      user: req.user._id
+      $or: [
+        { user: req.user._id },
+        { company: req.user.company?.companyName || null }
+      ]
     });
 
     res.status(200).json({ data: clients });
@@ -151,12 +200,20 @@ const getArchivedClients = async (req, res) => {
 };
 
 
+
 const recoverClient = async (req, res) => {
   try {
     const { id } = req.params;
 
     const client = await ClientModel.findOneAndUpdate(
-      { _id: id, user: req.user._id, deleted: true },
+      {
+        _id: id,
+        deleted: true,
+        $or: [
+          { user: req.user._id },
+          { company: req.user.company?.companyName || null }
+        ]
+      },
       { deleted: false },
       { new: true }
     );
