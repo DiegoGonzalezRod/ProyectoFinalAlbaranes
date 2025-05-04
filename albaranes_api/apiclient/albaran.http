@@ -4,8 +4,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y
 Content-Type: application/json
 
 {
-  "clientId": "68176e75d03a00430b5675ad",
-  "projectId": "68176e8fd03a00430b5675b3",
+  "clientId": "68177d0150f069349d6f8e72",
+  "projectId": "68177d4350f069349d6f8e76",
   "format": "hours",
   "description": "Desarrollo backend para API1111",
   "workdate": "2025-04-29",
@@ -37,6 +37,18 @@ Content-Type: application/json
 
 
 ### Descargar PDF de un albarán por ID
-GET http://localhost:3096/api/albaran/pdf/68176113d3545cddaad65251
+GET http://localhost:3096/api/albaran/pdf/68176f23d03a00430b5675b8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
 Content-Type: application/json
+
+###Firmar albarán
+POST http://localhost:3096/api/albaran/sign/68176f23d03a00430b5675b8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
+Content-Type: multipart/form-data; boundary=boundary123
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="firma.png"
+Content-Type: image/png
+
+< C:\Users\obito\Downloads\firma.png
+--boundary123--
