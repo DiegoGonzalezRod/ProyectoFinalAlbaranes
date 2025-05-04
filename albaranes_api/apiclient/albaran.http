@@ -1,13 +1,42 @@
 ### Crear albarán
 POST http://localhost:3096/api/albaran
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3Mjc1ZjQ4YTNhMGZhOTZmZmNlYmEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM0Nzg3MSwiZXhwIjoxNzQ2MzU1MDcxfQ.kVKKeWgNIGfpRiMkN-G81TnMyjphkjKrKXxyu8lfgu8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
 Content-Type: application/json
 
 {
-  "clientId": "681727b248a3a0fa96ffcec6",
-  "projectId": "6817281148a3a0fa96ffcecc",
+  "clientId": "68176e75d03a00430b5675ad",
+  "projectId": "68176e8fd03a00430b5675b3",
   "format": "hours",
-  "description": "Desarrollo backend para API",
+  "description": "Desarrollo backend para API1111",
   "workdate": "2025-04-29",
   "hours": 8
 }
+
+### Crear albaran tipo material
+POST http://localhost:3096/api/albaran
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NDNjZTUzZmUzZjk1ZjhiZDlhMDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM1NTE1MCwiZXhwIjoxNzQ2MzYyMzUwfQ.gEBbyGrhVcjl2W7azU5Kc_T-TNysTZQ1ZV7TQk_HPLQ
+Content-Type: application/json
+
+{
+  "clientId": "67ff83f8ea227ac5deea6e6d",
+  "projectId": "67ff8dc71c85de69b29d8e86",
+  "format": "material",
+  "material": "Hormigón armado",
+  "description": "Aplicación de hormigón armado",
+  "workdate": "3/1/2024"
+}
+###Obtener Albaranes
+GET http://localhost:3096/api/albaran
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
+
+
+### Obtener albarán por Id
+GET http://localhost:3096/api/albaran/68176113d3545cddaad65251
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
+Content-Type: application/json
+
+
+### Descargar PDF de un albarán por ID
+GET http://localhost:3096/api/albaran/pdf/68176113d3545cddaad65251
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
+Content-Type: application/json

@@ -17,7 +17,9 @@ const validatorCreateClient = [
   check("address")
     .optional()
     .isString().withMessage("La dirección debe ser texto"),
-
+  check("cif")
+    .optional()
+    .isString().withMessage("El CIF debe ser un texto"),
   (req, res, next) => validateResults(req, res, next)
 ];
 

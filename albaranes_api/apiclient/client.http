@@ -1,18 +1,20 @@
 ### Crear cliente
 POST http://localhost:3096/api/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3NjA4Y2QzNTQ1Y2RkYWFkNjUyNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM2MjUwOCwiZXhwIjoxNzQ2MzY5NzA4fQ.CmSJ7-fHnwD1UyJPAAXdiEqlnL0MuVLtpEhdwO-jxQ8
 Content-Type: application/json
 
 {
-  "name": "Cliente S.A.",
-  "contactEmail": "cliente8@ejemplo.com",
+  "name": "Cliente S.A1111.",
+  "contactEmail": "cliente0@ejemplo.com",
   "phone": "912345678",
-  "address": "Calle ClientePrueba3 1423"
+   "cif": "12345678Z",
+  "address": "Calle ClientePrueba3 1423",
+ 
 }
 
 ### Obtener todos los clientes del usuario autenticado
 GET http://localhost:3096/api/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwOWQ4NmZkMTVmNGI3MDBlYTRlOGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkxOTM2NiwiZXhwIjoxNzQ1OTI2NTY2fQ.SpDBkJqFyBapZbd7tZyyelqxY5cqkWGPqdZdPPqHnlI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3Mjc1ZjQ4YTNhMGZhOTZmZmNlYmEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM0Nzg3MSwiZXhwIjoxNzQ2MzU1MDcxfQ.kVKKeWgNIGfpRiMkN-G81TnMyjphkjKrKXxyu8lfgu8
 Content-Type: application/json
 
 ### Obtener un cliente por ID

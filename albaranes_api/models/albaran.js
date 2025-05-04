@@ -46,6 +46,10 @@ const deliveryNoteSchema = new mongoose.Schema({
   pending: {
     type: Boolean,
     default: true
+  },
+  deleted: {  
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true,

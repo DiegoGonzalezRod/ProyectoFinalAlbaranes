@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const routers = require('./routes/index');
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', routers);
+app.use('/albaranes', express.static(path.join(__dirname, 'albaranes')));
 
 const port = process.env.PORT || 3000;
 

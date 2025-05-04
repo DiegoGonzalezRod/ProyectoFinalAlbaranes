@@ -4,6 +4,7 @@ const ClientSchema = new mongoose.Schema({
   name: { type: String, required: true },
   contactEmail: { type: String },
   phone: { type: String },
+  cif: { type: String },
   address: { type: String },
   deleted: { type: Boolean, default: false }, // soft delete
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'users' }, // el que lo creó
