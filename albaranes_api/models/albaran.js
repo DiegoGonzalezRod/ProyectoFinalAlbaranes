@@ -52,4 +52,4 @@ const deliveryNoteSchema = new mongoose.Schema({
   versionKey: false
 });
 
-module.exports = mongoose.model('deliverynotes', deliveryNoteSchema);
+module.exports = mongoose.model('albaran', deliveryNoteSchema);

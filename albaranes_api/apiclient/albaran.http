@@ -1,36 +1,13 @@
+### Crear albarán
 POST http://localhost:3096/api/albaran
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE3Mjc1ZjQ4YTNhMGZhOTZmZmNlYmEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjM0Nzg3MSwiZXhwIjoxNzQ2MzU1MDcxfQ.kVKKeWgNIGfpRiMkN-G81TnMyjphkjKrKXxyu8lfgu8
 Content-Type: application/json
 
 {
-  "project": "6810ec3b3ed2a660a9b19eea",
-  "type": "hours",
-  "items": [
-    {
-      "description": "Programador Backend1",
-      "quantity": 5
-    },
-    {
-      "description": "Programador Frontend1",
-      "quantity": 4
-    }
-  ]
+  "clientId": "681727b248a3a0fa96ffcec6",
+  "projectId": "6817281148a3a0fa96ffcecc",
+  "format": "hours",
+  "description": "Desarrollo backend para API",
+  "workdate": "2025-04-29",
+  "hours": 8
 }
-
-### Listar todos los albaranes del usuario
-GET http://localhost:3096/api/albaran
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
-
-
-### Obtener albarán por ID
-GET http://localhost:3096/api/albaran/6810eca93ed2a660a9b19eef
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
-
-Content-Type: application/json
-
-
-### Descargar PDF del albarán
-GET http://localhost:3096/api/albaran/pdf/6810eca93ed2a660a9b19eef
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU 
-
-
