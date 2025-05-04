@@ -1,0 +1,36 @@
+POST http://localhost:3096/api/albaran
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
+Content-Type: application/json
+
+{
+  "project": "6810ec3b3ed2a660a9b19eea",
+  "type": "hours",
+  "items": [
+    {
+      "description": "Programador Backend1",
+      "quantity": 5
+    },
+    {
+      "description": "Programador Frontend1",
+      "quantity": 4
+    }
+  ]
+}
+
+### Listar todos los albaranes del usuario
+GET http://localhost:3096/api/albaran
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
+
+
+### Obtener albarán por ID
+GET http://localhost:3096/api/albaran/6810eca93ed2a660a9b19eef
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
+
+Content-Type: application/json
+
+
+### Descargar PDF del albarán
+GET http://localhost:3096/api/albaran/pdf/6810eca93ed2a660a9b19eef
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU 
+
+

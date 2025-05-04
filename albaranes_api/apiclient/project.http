@@ -1,11 +1,11 @@
 POST http://localhost:3096/api/project
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBlMTY4NTQ1OGRmNzM0MmM5NjAyZDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1MzczMywiZXhwIjoxNzQ1NzYwOTMzfQ.GRMwZIIISZg7842UPLxv-5Pf394XnZ1zfa7qkbwYqwo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
 Content-Type: application/json
 
 {
-  "name": "Proyecto Tienda Online",
+  "name": "Proyecto Tienda Online12",
   "description": "Desarrollo de eCommerce",
-  "client": "680d04b959c12b3a09c631b9"
+  "client": "68109e7bfd15f4b700ea4e96"
 }
 
 ### Actualizar proyecto por ID
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 ### Obtener todos los proyectos
 GET http://localhost:3096/api/project
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODBlMTY4NTQ1OGRmNzM0MmM5NjAyZDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1MzczMywiZXhwIjoxNzQ1NzYwOTMzfQ.GRMwZIIISZg7842UPLxv-5Pf394XnZ1zfa7qkbwYqwo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwZWI0YTNlZDJhNjYwYTliMTllZGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkzOTI3NCwiZXhwIjoxNzQ1OTQ2NDc0fQ.jeK2mAiy_rA9uPcps6VmZX0MrNfuEGWx2Ujqz3ypZNU
 Content-Type: application/json
 
 
