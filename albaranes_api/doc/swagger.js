@@ -23,7 +23,7 @@ const options = {
       },
     ],
   },
-  apis: ["./routes/*.js"], // Asegúrate de documentar tus rutas con comentarios Swagger
+  apis: ["./routes/*.js"], 
 };
 
 module.exports = swaggerJSDoc(options);

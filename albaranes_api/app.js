@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config({path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'});
 const path = require('path');
 
 const routers = require('./routes/index');
@@ -24,9 +24,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-    console.log(`Escuchando en el puerto ${port}`);
-    console.log(`Swagger: http://localhost:${port}/api-docs`);
-});
 
 dbConnect();
+
+module.exports = app 

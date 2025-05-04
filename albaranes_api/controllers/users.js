@@ -113,8 +113,13 @@ const userLogin = async (req, res) => {
         },
         { new: true }
       );
-      user.set('password', undefined, { strict: false })
-      res.status(200).json(user);
+  
+      user.set('password', undefined, { strict: false });
+  
+      res.status(200).json({
+        message: 'Datos personales actualizados correctamente',
+        user
+      });
     } catch (err) {
       console.log("Error en updateUserPersonalData:", err);
       res.status(403).send("ERROR_ON_BOARDING_USER");
