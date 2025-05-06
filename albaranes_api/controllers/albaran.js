@@ -6,26 +6,26 @@ const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
+const mongoose = require('mongoose');
 
-
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
 const createAlbaran = async (req, res) => {
-  
   const data = matchedData(req);
 
   try {
-      const note = await AlbaranModel.create({
-          ...data,
-          userId: req.user._id,
-      });
-
-      res.status(200).json(note);
+    const note = await AlbaranModel.create({
+      ...data,
+      userId: req.user._id,
+    });
+    res.status(201).json(note);
   } catch (err) {
-      console.error('Error al crear albarán:', err);
-      return handleHttpError(res);
+    console.error('Error al crear albarán:', err);
+    return handleHttpError(res, 'ERROR_CREAR_ALBARAN');
   }
 };
-const getAlbaran= async (req, res) => {
+
+const getAlbaran = async (req, res) => {
   try {
     if (!req.user || !req.user._id) {
       return res.status(401).json({ message: "Token inválido o expirado" });
@@ -33,7 +33,7 @@ const getAlbaran= async (req, res) => {
 
     const deliveryNotes = await AlbaranModel.find({
       userId: req.user._id,
-      deleted: false 
+      deleted: false,
     })
       .populate('clientId')
       .populate('projectId')
@@ -46,49 +46,55 @@ const getAlbaran= async (req, res) => {
   }
 };
 
-
 const getAlbaranById = async (req, res) => {
   const userId = req.user.id;
   const noteId = req.params.id;
 
+  if (!isValidObjectId(noteId)) {
+    return handleHttpError(res, 'ID inválido', 400);
+  }
+
   try {
-      const note = await AlbaranModel.findById(noteId)
-          .populate('clientId', 'name address cif') // solo campos necesarios
-          .populate('projectId', 'name code projectCode')
-          .populate('userId', 'name company'); // usuario que lo creó
+    const note = await AlbaranModel.findById(noteId)
+      .populate('clientId', 'name address cif')
+      .populate('projectId', 'name code projectCode')
+      .populate('userId', 'name company');
 
-      if (!note) return handleHttpError(res, 'Albarán no encontrado', 404);
-      if (note.userId._id.toString() !== userId) return handleHttpError(res, 'No autorizado', 401);
+    if (!note) return handleHttpError(res, 'Albarán no encontrado', 404);
+    if (note.userId._id.toString() !== userId) return handleHttpError(res, 'No autorizado', 403);
 
-      const response = {
-          company: note.userId.company || null,
-          name: note.userId.name,
-          date: note.createdAt,
-          client: {
-              name: note.clientId.name,
-              address: note.clientId.address,
-              cif: note.clientId.cif || '',
-          },
-          project: note.projectId.name || note.projectId.code || note.projectId.projectCode || '',
-          format: note.format,
-          concepts: [{
-              description: note.description,
-              value: note.format === 'hours' ? note.hours : note.material
-          }],
-          photo: note.sign || null,
-      };
+    const response = {
+      company: note.userId.company || null,
+      name: note.userId.name,
+      date: note.createdAt,
+      client: {
+        name: note.clientId.name,
+        address: note.clientId.address,
+        cif: note.clientId.cif || '',
+      },
+      project: note.projectId.name || note.projectId.code || note.projectId.projectCode || '',
+      format: note.format,
+      concepts: [{
+        description: note.description,
+        value: note.format === 'hours' ? note.hours : note.material
+      }],
+      photo: note.sign || null,
+    };
 
-      return res.status(200).json(response);
+    return res.status(200).json(response);
   } catch (err) {
-      console.error('Error al obtener el albarán:', err);
-      return handleHttpError(res);
+    console.error('Error al obtener el albarán:', err);
+    return handleHttpError(res);
   }
 };
-
 
 const generarPDFAlbaran = async (req, res) => {
   const userId = req.user._id;
   const noteId = req.params.id;
+
+  if (!isValidObjectId(noteId)) {
+    return handleHttpError(res, 'ID inválido', 400);
+  }
 
   try {
     const note = await AlbaranModel.findById(noteId)
@@ -98,7 +104,7 @@ const generarPDFAlbaran = async (req, res) => {
 
     if (!note) return handleHttpError(res, 'Albarán no encontrado', 404);
     if (!note.userId || note.userId._id.toString() !== userId.toString()) {
-      return handleHttpError(res, 'No autorizado', 401);
+      return handleHttpError(res, 'No autorizado', 403);
     }
 
     const pdfName = `albaran_${noteId}.pdf`;
@@ -167,15 +173,15 @@ const generarPDFAlbaran = async (req, res) => {
   }
 };
 
-
-
-
-
 const signAlbaran = async (req, res) => {
-  try {
-    const albaranId = req.params.id;
-    const userId = req.user._id;
+  const albaranId = req.params.id;
+  const userId = req.user._id;
 
+  if (!isValidObjectId(albaranId)) {
+    return handleHttpError(res, 'ID inválido', 400);
+  }
+
+  try {
     if (!req.file) return handleHttpError(res, 'No se ha proporcionado ningún archivo', 422);
 
     const note = await AlbaranModel.findById(albaranId)
@@ -185,25 +191,24 @@ const signAlbaran = async (req, res) => {
 
     if (!note) return handleHttpError(res, 'Albarán no encontrado', 404);
     if (!note.userId || note.userId._id.toString() !== userId.toString()) {
-      return handleHttpError(res, 'No autorizado', 401);
+      return handleHttpError(res, 'No autorizado', 403);
     }
 
     const { buffer, originalname } = req.file;
     const signFileName = `firma_${albaranId}${path.extname(originalname)}`;
-
     const uploadsPath = path.join(__dirname, '..', 'albaranes');
+    const localSignPath = path.join(uploadsPath, signFileName);
+
     if (!fs.existsSync(uploadsPath)) {
       fs.mkdirSync(uploadsPath, { recursive: true });
     }
 
-    const localSignPath = path.join(uploadsPath, signFileName);
     fs.writeFileSync(localSignPath, buffer);
 
     const signIPFS = await handleIPFS(buffer, originalname);
     note.sign = signIPFS;
     note.pending = false;
 
-    // PDF creation
     const pdfName = `albaran_${albaranId}.pdf`;
     const pdfPath = path.join(uploadsPath, pdfName);
     const doc = new PDFDocument();
@@ -223,9 +228,7 @@ const signAlbaran = async (req, res) => {
       doc.text(`CIF: ${note.clientId.cif || ''}`);
     }
 
-    doc.moveDown();
-    doc.fontSize(14).text('Detalles:', { underline: true });
-
+    doc.moveDown().fontSize(14).text('Detalles:', { underline: true });
     const concepts = note.format === 'hours'
       ? [{ name: note.userId.name, hours: note.hours }]
       : [{ name: note.material || 'Material', quantity: 1 }];
@@ -251,7 +254,6 @@ const signAlbaran = async (req, res) => {
       const pdfBuffer = fs.readFileSync(pdfPath);
       const pdfIPFS = await handleIPFS(pdfBuffer, pdfName);
       note.pdf = pdfIPFS;
-
       await note.save();
 
       return res.status(200).json({
@@ -268,15 +270,19 @@ const signAlbaran = async (req, res) => {
 };
 
 const deleteAlbaran = async (req, res) => {
-  try {
-    const albaranId = req.params.id;
-    const userId = req.user._id;
+  const albaranId = req.params.id;
+  const userId = req.user._id;
 
+  if (!isValidObjectId(albaranId)) {
+    return handleHttpError(res, 'ID inválido', 400);
+  }
+
+  try {
     const note = await AlbaranModel.findById(albaranId);
 
     if (!note) return handleHttpError(res, 'Albarán no encontrado', 404);
     if (!note.userId || note.userId.toString() !== userId.toString()) {
-      return handleHttpError(res, 'No autorizado', 401);
+      return handleHttpError(res, 'No autorizado', 403);
     }
 
     if (note.sign) {
@@ -284,7 +290,6 @@ const deleteAlbaran = async (req, res) => {
     }
 
     await AlbaranModel.findByIdAndDelete(albaranId);
-
     return res.status(200).json({ message: 'Albarán eliminado correctamente' });
   } catch (err) {
     console.error('Error al eliminar el albarán:', err);
@@ -292,9 +297,11 @@ const deleteAlbaran = async (req, res) => {
   }
 };
 
-
-
-
-
-
-module.exports = {createAlbaran,getAlbaran,getAlbaranById,generarPDFAlbaran,signAlbaran,deleteAlbaran};
+module.exports = {
+  createAlbaran,
+  getAlbaran,
+  getAlbaranById,
+  generarPDFAlbaran,
+  signAlbaran,
+  deleteAlbaran
+};
